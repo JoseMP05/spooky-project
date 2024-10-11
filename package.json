@@ -1,0 +1,25 @@
+{
+  "name": "spooky",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "lint": "eslint --fix \"src/**/*.{js,ts,jsx,tsx,astro}\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "astro": "^4.16.0",
+    "astro-cloudinary": "^1.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.12.0",
+    "eslint-plugin-astro": "^1.2.4"
+  }
+}
