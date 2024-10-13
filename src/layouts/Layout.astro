@@ -18,29 +18,61 @@ const { title } = Astro.props;
 </html>
 <style is:global>
 	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
+		--accent: #FF6500;
+		--neutral-light: #FFFCF2;
+		--neutral-medium:#CCC5B9;
+		--neutral-dark: #4E4C47;
 	}
+
+	*{
+		box-sizing: border-box;
+	}
+
 	html {
 		font-family: system-ui, sans-serif;
-		background: #13151a;
+		background: #252422;
+		color: var(--neutral-medium);
 	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
+
+	body {
+		margin: 0;
+	}
+
+	button {
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    overflow: visible;
+
+    background: transparent;
+
+    /* inherit font & color from ancestor */
+    color: inherit;
+    font: inherit;
+
+    /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+    line-height: normal;
+
+    /* Corrects font smoothing for webkit */
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+
+    /* Corrects inability to style clickable `input` types in iOS */
+    -webkit-appearance: none;
+		cursor: pointer;
+	}
+
+	input{
+		background-color: var(--neutral-dark);
+		font: inherit;
+		padding: 14px 16px 14px 16px;
+		border: none;
+		border-radius: 12px;
+	}
+
+	input:focus{
+		outline: 1px solid var(--accent);
+		caret-color: var(--neutral-light);
 	}
 </style>

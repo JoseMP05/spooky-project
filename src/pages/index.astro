@@ -4,7 +4,6 @@ import { CldUploadWidget, CldImage } from "astro-cloudinary"
 
 import { getCollection } from "astro:content"
 const images = await getCollection("images")
-const hola = "Hola mundo"
 ---
 
 <Layout title="Cloudinary Hackathon">
@@ -55,10 +54,7 @@ const hola = "Hola mundo"
                   src={image.data.public_id}
                   width={250}
                   height={250}
-                  crop={{
-                    type: "fill",
-                    source: true,
-                  }}
+                  preserveTransformations={true}
                 />
               </a>
             </li>
@@ -101,6 +97,10 @@ const hola = "Hola mundo"
       gap: 4px;
       list-style: none;
     }
+
+    img {
+    max-width: 100%;
+  }
   </style>
 
   <script></script>

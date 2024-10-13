@@ -1,6 +1,7 @@
 ---
 import { getCldImageUrl } from "astro-cloudinary/helpers"
 import Layout from "../layouts/Layout.astro"
+import ButtonExample from "../components/ButtonExample.astro"
 
 const { searchParams } = Astro.url
 const id = searchParams.get("id")
@@ -8,30 +9,42 @@ const id = searchParams.get("id")
 if (id == null) return Astro.redirect("/")
 
 const url = getCldImageUrl({ src: id })
-console.log({ id, url })
+
+const costumeExamples = [
+  { imageUrl: "/public/examples/pirate_costume.jpg", name: "Pirate" },
+  { imageUrl: "/public/examples/angel_costume.jpg", name: "Angel" },
+  { imageUrl: "/public/examples/chucky_costume.jpg", name: "Chucky" },
+  { imageUrl: "/public/examples/devil_costume.jpg", name: "Devil" },
+  { imageUrl: "/public/examples/astronaut_costume.jpg", name: "Astronaut" },
+  { imageUrl: "/public/examples/mario_costume.jpg", name: "Mario Mario" },
+  { imageUrl: "/public/examples/princess_costume.jpg", name: "Princess" },
+  { imageUrl: "/public/examples/scary-clown_costume.jpg", name: "Scary Clown" },
+  { imageUrl: "/public/examples/shrek_costume.jpg", name: "Shrek" },
+  { imageUrl: "/public/examples/spiderman_costume.jpg", name: "Spiderman" },
+  { imageUrl: "/public/examples/skeleton_costume.jpg", name: "Skeleton" },
+  { imageUrl: "/public/examples/vampire_costume.jpg", name: "Vampire" },
+]
 ---
 
 <Layout title="Cloudinary Photo">
   <main data-id={id}>
-    <header>
+    <!-- <header>
       <h1> Selecciona el tema </h1>
-      <button>
+      <button data-topic="ghost">
         ¡Añade fantasmas!
       </button>
 
-      <button>
+      <button data-topic="zombies">
         ¡GROAR ZOMBIES!
       </button>
 
-      <button>
+      <button data-topic="devil">
         ¡El diablo!
       </button>
     </header>
 
-    <two-up>
-      <img id="original" src={url} />
-      <img id="preview" src={url} />
-    </two-up>
+    <img id="original" src={url} />
+    <img id="preview" src={url} />
 
     <small>{url}</small>
 
@@ -39,70 +52,91 @@ console.log({ id, url })
       <button>
         Descargar en Avif
       </button>
+    </div> -->
+    <div>
+      <section>
+        <h1>What costume would you like to try?</h1>
+        <form>
+          <label>Costume
+            <input id="wearInput" type="text" placeholder="Eg: Batman" required>
+          </label>
+          <label>Add Background
+            <input id="backgroundInput" type="text" placeholder="Eg: Night city and batsignal in the sky">
+          </label>
+          <button id="wear">Wear</button>
+        </form>
+      </section>
+      <section class="examples">
+        <h2>Explore some examples</h2>
+        <div class="examples__container">
+          {costumeExamples.map((example) => (
+            <ButtonExample class:list={['examples__buttons']} {...example} />
+          ))}
+        </div>
+      </section>
+    </div>
+    <div>
+      <article>
+        <img id="transformation" src={url} alt="hola" width="500px">
+        <img id="original" src={url} alt="hola" width="500px">
+      </article>
     </div>
   </main>
 </Layout>
 
 <style>
   main {
-    width: 800px;
-    margin: 0 auto;
-    padding-top: 100px;
-    text-align: center;
-    padding-bottom: 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 1200px;
+    margin-inline: auto;
+    gap: 32px;
   }
 
-  img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 12px;
-    transition: opacity 0.3s ease;
+  .examples {
+  }
+
+  .examples__container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+    gap: 12px;
   }
 </style>
 
 <script>
-  import { getCldImageUrl } from "astro-cloudinary/helpers"
-  import "two-up-element"
-
+  import { applyTransformationToImage } from "../helpers/applyTransformationToImage"
+  
   const id = document.querySelector("main")?.getAttribute("data-id") ?? ""
-  const preview = document.getElementById("preview") as HTMLImageElement
-  const buttons = document.querySelectorAll("button")
-  const downloadButton = document.querySelector(
-    ".download"
-  ) as HTMLButtonElement
-
-  const TOPICS: Record<string, string> = {
-    ghost: "Add scary ghosts to the background",
-    zombies: "Add zombies to the background",
-    devil: "Add some devils to the background",
-    custom: "",
-  } as const
-
-  buttons.forEach((button) => {
-    button.addEventListener("click", (e) => {
-      const topic = button.getAttribute("data-topic")
-      if (topic == null) return
-
-      const url = getCldImageUrl({
-        src: id,
-        replaceBackground: TOPICS[topic],
-      })
-
-      preview.style.opacity = ".3"
-
-      preview.src = url
-      preview.onload = () => {
-        preview.style.opacity = "1"
-      }
+  const imgToTransform = document.getElementById("transformation") as HTMLImageElement
+  const buttons = document.querySelectorAll(".examples__buttons")
+  const wearButton = document.getElementById("wear") as HTMLButtonElement
+  
+  wearButton.addEventListener('click', event => {
+    event.preventDefault()
+    
+    const costumeTopic = document.getElementById('wearInput') as HTMLInputElement
+    const backgroundTopic = document.getElementById('backgroundInput') as HTMLInputElement
+    applyTransformationToImage({
+      id, 
+      imgToTransform, 
+      costumeTopic: costumeTopic.value, 
+      backgroundTopic: backgroundTopic.value})
     })
-  })
+    
+    buttons.forEach((button) => {
+      button.addEventListener("click", (e) => {
+        const costumeTopic = button.getAttribute("data-topic")
+        applyTransformationToImage({id, costumeTopic, imgToTransform })
+      })
+    })
+    
+  // const downloadButton = document.querySelector(".download") as HTMLButtonElement
+  // downloadButton.addEventListener("click", (e) => {
+  //   const url = getCldImageUrl({ src: id, format: "avif" })
 
-  downloadButton.addEventListener("click", (e) => {
-    const url = getCldImageUrl({ src: id, format: "avif" })
-
-    const a = document.createElement("a")
-    a.href = url
-    a.download = "image.avif"
-    a.click()
-  })
+  //   const a = document.createElement("a")
+  //   a.href = url
+  //   a.download = "image.avif"
+  //   a.click()
+  // })
 </script>
