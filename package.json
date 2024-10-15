@@ -16,6 +16,7 @@
   "description": "",
   "dependencies": {
     "@astrojs/vercel": "^7.8.1",
+    "@cloudinary-util/util": "^3.3.2",
     "astro": "^4.16.0",
     "astro-cloudinary": "^1.1.0",
     "dotenv": "^16.4.5"

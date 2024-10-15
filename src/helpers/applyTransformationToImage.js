@@ -17,4 +17,6 @@ export function applyTransformationToImage({id, imgToTransform, costumeTopic, ba
   imgToTransform.onload = () => {
     imgToTransform.style.opacity = "1"
   }
+
+  // return {src: url}
 }

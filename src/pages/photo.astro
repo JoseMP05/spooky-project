@@ -1,6 +1,22 @@
 ---
+import pirateCostume from '@examples/pirate_costume.jpg';
+import angelCostume from '@examples/angel_costume.jpg';
+import chuckyCostume from '@examples/chucky_costume.jpg';
+import devilCostume from '@examples/devil_costume.jpg';
+import astronautCostume from '@examples/astronaut_costume.jpg';
+import marioCostume from '@examples/mario_costume.jpg';
+import princessCostume from '@examples/princess_costume.jpg';
+import scaryClownCostume from '@examples/scary-clown_costume.jpg';
+import shrekCostume from '@examples/shrek_costume.jpg';
+import spidermanCostume from '@examples/spiderman_costume.jpg';
+import skeletonCostume from '@examples/skeleton_costume.jpg';
+import vampireCostume from '@examples/vampire_costume.jpg';
+
 import { getCldImageUrl } from "astro-cloudinary/helpers"
+
 import Layout from "../layouts/Layout.astro"
+
+
 import ButtonExample from "../components/ButtonExample.astro"
 
 const { searchParams } = Astro.url
@@ -11,18 +27,18 @@ if (id == null) return Astro.redirect("/")
 const url = getCldImageUrl({ src: id })
 
 const costumeExamples = [
-  { imageUrl: "/public/examples/pirate_costume.jpg", name: "Pirate" },
-  { imageUrl: "/public/examples/angel_costume.jpg", name: "Angel" },
-  { imageUrl: "/public/examples/chucky_costume.jpg", name: "Chucky" },
-  { imageUrl: "/public/examples/devil_costume.jpg", name: "Devil" },
-  { imageUrl: "/public/examples/astronaut_costume.jpg", name: "Astronaut" },
-  { imageUrl: "/public/examples/mario_costume.jpg", name: "Mario Mario" },
-  { imageUrl: "/public/examples/princess_costume.jpg", name: "Princess" },
-  { imageUrl: "/public/examples/scary-clown_costume.jpg", name: "Scary Clown" },
-  { imageUrl: "/public/examples/shrek_costume.jpg", name: "Shrek" },
-  { imageUrl: "/public/examples/spiderman_costume.jpg", name: "Spiderman" },
-  { imageUrl: "/public/examples/skeleton_costume.jpg", name: "Skeleton" },
-  { imageUrl: "/public/examples/vampire_costume.jpg", name: "Vampire" },
+  { src: pirateCostume, name: "Pirate", alt: "" },
+  { src: angelCostume, name: "Angel", alt: "" },
+  { src: chuckyCostume, name: "Chucky", alt: "" },
+  { src: devilCostume, name: "Devil", alt: "" },
+  { src: astronautCostume, name: "Astronaut", alt: "" },
+  { src: marioCostume, name: "Mario Mario", alt: "" },
+  { src: princessCostume, name: "Princess", alt: "" },
+  { src: scaryClownCostume, name: "Scary Clown", alt: "" },
+  { src: shrekCostume, name: "Shrek", alt: "" },
+  { src: spidermanCostume, name: "Spiderman", alt: "" },
+  { src: skeletonCostume, name: "Skeleton", alt: "" },
+  { src: vampireCostume, name: "Vampire", alt: "" },
 ]
 ---
 
@@ -104,8 +120,13 @@ const costumeExamples = [
 </style>
 
 <script>
+  import { pollForProcessingImage } from '@cloudinary-util/util'
   import { applyTransformationToImage } from "../helpers/applyTransformationToImage"
-  
+
+//   const handleImageUpdate = (url) => {
+//   const newUrl = url
+// }
+
   const id = document.querySelector("main")?.getAttribute("data-id") ?? ""
   const imgToTransform = document.getElementById("transformation") as HTMLImageElement
   const buttons = document.querySelectorAll(".examples__buttons")
@@ -116,11 +137,24 @@ const costumeExamples = [
     
     const costumeTopic = document.getElementById('wearInput') as HTMLInputElement
     const backgroundTopic = document.getElementById('backgroundInput') as HTMLInputElement
-    applyTransformationToImage({
+    const transformationUrl = applyTransformationToImage({
       id, 
       imgToTransform, 
       costumeTopic: costumeTopic.value, 
-      backgroundTopic: backgroundTopic.value})
+      backgroundTopic: backgroundTopic.value
+    })
+
+    // pollForProcessingImage({ src: transformationUrl.src }).
+    // then(isProcessed => {
+    //   imgToTransform.src = transformationUrl.src
+    //   console.log(isProcessed)
+    // }).
+    // catch(error => console.log("Failed to process the image."))
+      // const isProcessed = await pollForProcessingImage({ src: transformationUrl.src })
+      // if (isProcessed)
+      //   imgToTransform.src = transformationUrl
+      // else
+      //   console.error("Failed to process the image.")
     })
     
     buttons.forEach((button) => {
