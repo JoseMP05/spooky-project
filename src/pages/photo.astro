@@ -94,7 +94,7 @@ const costumeExamples = [
     <div>
       <article>
         <img id="transformation" src={url} alt="hola" width="500px">
-        <img id="original" src={url} alt="hola" width="500px">
+        <!-- <img id="original" src={url} alt="hola" width="500px"> -->
       </article>
     </div>
   </main>
@@ -120,12 +120,7 @@ const costumeExamples = [
 </style>
 
 <script>
-  import { pollForProcessingImage } from '@cloudinary-util/util'
   import { applyTransformationToImage } from "../helpers/applyTransformationToImage"
-
-//   const handleImageUpdate = (url) => {
-//   const newUrl = url
-// }
 
   const id = document.querySelector("main")?.getAttribute("data-id") ?? ""
   const imgToTransform = document.getElementById("transformation") as HTMLImageElement
@@ -137,30 +132,18 @@ const costumeExamples = [
     
     const costumeTopic = document.getElementById('wearInput') as HTMLInputElement
     const backgroundTopic = document.getElementById('backgroundInput') as HTMLInputElement
-    const transformationUrl = applyTransformationToImage({
+    applyTransformationToImage({
       id, 
       imgToTransform, 
       costumeTopic: costumeTopic.value, 
       backgroundTopic: backgroundTopic.value
     })
-
-    // pollForProcessingImage({ src: transformationUrl.src }).
-    // then(isProcessed => {
-    //   imgToTransform.src = transformationUrl.src
-    //   console.log(isProcessed)
-    // }).
-    // catch(error => console.log("Failed to process the image."))
-      // const isProcessed = await pollForProcessingImage({ src: transformationUrl.src })
-      // if (isProcessed)
-      //   imgToTransform.src = transformationUrl
-      // else
-      //   console.error("Failed to process the image.")
-    })
+  })
     
     buttons.forEach((button) => {
       button.addEventListener("click", (e) => {
         const costumeTopic = button.getAttribute("data-topic")
-        applyTransformationToImage({id, costumeTopic, imgToTransform })
+        applyTransformationToImage({id, costumeTopic, imgToTransform})
       })
     })
     
