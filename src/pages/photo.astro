@@ -1,7 +1,23 @@
 ---
+import pirateCostume from '@examples/pirate_costume.jpg';
+import angelCostume from '@examples/angel_costume.jpg';
+import chuckyCostume from '@examples/chucky_costume.jpg';
+import devilCostume from '@examples/devil_costume.jpg';
+import astronautCostume from '@examples/astronaut_costume.jpg';
+import marioCostume from '@examples/mario_costume.jpg';
+import princessCostume from '@examples/princess_costume.jpg';
+import scaryClownCostume from '@examples/scary-clown_costume.jpg';
+import shrekCostume from '@examples/shrek_costume.jpg';
+import spidermanCostume from '@examples/spiderman_costume.jpg';
+import skeletonCostume from '@examples/skeleton_costume.jpg';
+import vampireCostume from '@examples/vampire_costume.jpg';
+
 import { getCldImageUrl } from "astro-cloudinary/helpers"
+
 import Layout from "../layouts/Layout.astro"
-import ButtonExample from "../components/ButtonExample.astro"
+
+import ExampleButton from "@components/ExampleButton.astro"
+import CostumeForm from "@components/CostumeForm.astro"
 
 const { searchParams } = Astro.url
 const id = searchParams.get("id")
@@ -11,75 +27,60 @@ if (id == null) return Astro.redirect("/")
 const url = getCldImageUrl({ src: id })
 
 const costumeExamples = [
-  { imageUrl: "/public/examples/pirate_costume.jpg", name: "Pirate" },
-  { imageUrl: "/public/examples/angel_costume.jpg", name: "Angel" },
-  { imageUrl: "/public/examples/chucky_costume.jpg", name: "Chucky" },
-  { imageUrl: "/public/examples/devil_costume.jpg", name: "Devil" },
-  { imageUrl: "/public/examples/astronaut_costume.jpg", name: "Astronaut" },
-  { imageUrl: "/public/examples/mario_costume.jpg", name: "Mario Mario" },
-  { imageUrl: "/public/examples/princess_costume.jpg", name: "Princess" },
-  { imageUrl: "/public/examples/scary-clown_costume.jpg", name: "Scary Clown" },
-  { imageUrl: "/public/examples/shrek_costume.jpg", name: "Shrek" },
-  { imageUrl: "/public/examples/spiderman_costume.jpg", name: "Spiderman" },
-  { imageUrl: "/public/examples/skeleton_costume.jpg", name: "Skeleton" },
-  { imageUrl: "/public/examples/vampire_costume.jpg", name: "Vampire" },
+  { src: pirateCostume, name: "Pirate", alt: "" },
+  { src: angelCostume, name: "Angel", alt: "" },
+  { src: chuckyCostume, name: "Chucky", alt: "" },
+  { src: devilCostume, name: "Devil", alt: "" },
+  { src: astronautCostume, name: "Astronaut", alt: "" },
+  { src: marioCostume, name: "Mario Mario", alt: "" },
+  { src: princessCostume, name: "Princess", alt: "" },
+  { src: scaryClownCostume, name: "Scary Clown", alt: "" },
+  { src: shrekCostume, name: "Shrek", alt: "" },
+  { src: spidermanCostume, name: "Spiderman", alt: "" },
+  { src: skeletonCostume, name: "Skeleton", alt: "" },
+  { src: vampireCostume, name: "Vampire", alt: "" },
 ]
 ---
 
 <Layout title="Cloudinary Photo">
-  <main data-id={id}>
-    <!-- <header>
-      <h1> Selecciona el tema </h1>
-      <button data-topic="ghost">
-        ¡Añade fantasmas!
-      </button>
-
-      <button data-topic="zombies">
-        ¡GROAR ZOMBIES!
-      </button>
-
-      <button data-topic="devil">
-        ¡El diablo!
-      </button>
-    </header>
-
-    <img id="original" src={url} />
-    <img id="preview" src={url} />
-
-    <small>{url}</small>
-
-    <div>
-      <button>
-        Descargar en Avif
-      </button>
-    </div> -->
-    <div>
-      <section>
-        <h1>What costume would you like to try?</h1>
-        <form>
-          <label>Costume
-            <input id="wearInput" type="text" placeholder="Eg: Batman" required>
-          </label>
-          <label>Add Background
-            <input id="backgroundInput" type="text" placeholder="Eg: Night city and batsignal in the sky">
-          </label>
-          <button id="wear">Wear</button>
-        </form>
+  <main data-id={id} id="appLayout">
+    <div class="interactive">
+      <section class="costume-form">
+        <CostumeForm id="costumeForm"/>
       </section>
       <section class="examples">
-        <h2>Explore some examples</h2>
+        <h2 class="examples__title">Explore some examples</h2>
         <div class="examples__container">
           {costumeExamples.map((example) => (
-            <ButtonExample class:list={['examples__buttons']} {...example} />
+            <ExampleButton class:list={['examples__buttons']} {...example} />
           ))}
         </div>
       </section>
     </div>
-    <div>
+    <div class="result">
       <article>
-        <img id="transformation" src={url} alt="hola" width="500px">
-        <img id="original" src={url} alt="hola" width="500px">
+        <img id="transformation" src={url} alt="" width="500px">
       </article>
+    </div>
+    <div class="share">
+      <section>
+        <h1>Share your scary costume!</h1>
+        <div>
+          <button>discord</button>
+          <button>Instagram</button>
+    
+          <button>Whatsapp</button>
+          <button>X / Twitter</button>
+        </div>
+      </section>
+      <section>
+        <h2>Take your costume with you</h2>
+        <button>Download</button>
+      </section>
+      <section>
+        <h2>Keep exploring!</h2>
+        <button>Wear Another Costume</button>
+      </section>
     </div>
   </main>
 </Layout>
@@ -87,13 +88,12 @@ const costumeExamples = [
 <style>
   main {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 0px;
+    justify-items: center;
     max-width: 1200px;
     margin-inline: auto;
     gap: 32px;
-  }
-
-  .examples {
+    transition: grid-template-columns 0.25s;
   }
 
   .examples__container{
@@ -101,17 +101,36 @@ const costumeExamples = [
     grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
     gap: 12px;
   }
+
+  article {
+    position: sticky;
+    top: 32px;
+    
+    img{
+      border-radius: 8px;
+    }
+  }
+
+  .share{
+    min-width: 0px;
+
+    section{
+      opacity: 0;
+      visibility: hidden
+      ;
+    }
+  }
 </style>
 
 <script>
   import { applyTransformationToImage } from "../helpers/applyTransformationToImage"
-  
+
   const id = document.querySelector("main")?.getAttribute("data-id") ?? ""
   const imgToTransform = document.getElementById("transformation") as HTMLImageElement
   const buttons = document.querySelectorAll(".examples__buttons")
-  const wearButton = document.getElementById("wear") as HTMLButtonElement
+  const costumeForm = document.getElementById("costumeForm") as HTMLButtonElement
   
-  wearButton.addEventListener('click', event => {
+  costumeForm.addEventListener('submit', event => {
     event.preventDefault()
     
     const costumeTopic = document.getElementById('wearInput') as HTMLInputElement
@@ -120,13 +139,14 @@ const costumeExamples = [
       id, 
       imgToTransform, 
       costumeTopic: costumeTopic.value, 
-      backgroundTopic: backgroundTopic.value})
+      backgroundTopic: backgroundTopic.value
     })
+  })
     
     buttons.forEach((button) => {
       button.addEventListener("click", (e) => {
         const costumeTopic = button.getAttribute("data-topic")
-        applyTransformationToImage({id, costumeTopic, imgToTransform })
+        applyTransformationToImage({id, costumeTopic, imgToTransform})
       })
     })
     
