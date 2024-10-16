@@ -1,0 +1,50 @@
+---
+const {class:className, text, id=''} = Astro.props
+---
+
+<button class={className} id={id}>{text}</button>
+
+<style>
+  button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-weight: bold;
+    color: white;
+    padding: 12px 24px;
+    background: linear-gradient(to bottom, rgba(255, 106, 0, 1) 0%,rgba(149, 79, 0, 1) 100%);
+    box-shadow:
+    inset 0px 2px 0px 0px rgba(255, 255, 255, 0.6),
+    inset 0px -6px 8px 0px rgba(255, 255, 255, 0.05),
+    0px 8px 0px 0px #893300;
+    border-radius: 50px;
+    transition: box-shadow 0.25s, transform 0.25s;
+  }
+
+  button.outline{
+    background: var(--background);
+    box-shadow:
+    inset 0px 2px 0px 0px rgba(255, 255, 255, 0.6),
+    inset 0px -6px 8px 0px rgba(255, 255, 255, 0.3)
+    0px 8px 0px 0px #FF6500;
+    border: 1px solid var(--accent);
+  }
+
+  button:hover{
+    transform: translateY(4px);
+    box-shadow:
+    inset 0px 2px 0px 0px rgba(255, 255, 255, 0.6),
+    inset 0px -6px 8px 0px rgba(255, 255, 255, 0.05),
+    0px 4px 0px 0px #893300;
+  }
+
+  button:active{
+    transform: translateY(8px);
+    box-shadow:
+    inset 0px 2px 0px 0px rgba(255, 255, 255, 0.6),
+    inset 0px -6px 8px 0px rgba(255, 255, 255, 0.05),
+    0px 0px 0px 0px #893300;
+  }
+
+</style>
