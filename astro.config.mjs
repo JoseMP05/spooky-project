@@ -9,6 +9,5 @@ export default defineConfig({
   experimental: {
     contentLayer: true,
   },
-
-  adapter: vercel()
+  adapter: vercel({ imageService: true })
 });
