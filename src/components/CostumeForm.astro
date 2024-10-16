@@ -1,0 +1,70 @@
+---
+import Button from "@components/Button.astro"
+import Input from "@components/Input.astro"
+
+const {id} = Astro.props
+---
+<form id={id}>
+  <h1>What costume would you like to try?</h1>
+  <div class="inputs-container">
+    <Input id="wearInput" placeholder="Eg: Batman" isRequired/>
+    <div>
+      <label>
+        <Input type="checkbox" id="replaceBackground"/>
+        Add a scary custom background
+      </label>
+      <Input id="backgroundInput" placeholder="Eg: Night city and batsignal in the sky" isHidden />
+    </div>
+  </div>
+   <Button id="wear" text="Wear">
+</form>
+
+<style>
+  form{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px;
+    background: rgba(204, 197, 185, 0.1);
+    background-image: linear-gradient(165deg, rgba(255,101,0,0.1) 20%, rgba(255,255,255,0) 100%);
+    border-radius: 12px;
+  }
+
+  h1{
+    margin: 0;
+  }
+
+  label{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .inputs-container{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .inputs-container > div{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+</style>
+
+<script>
+  const replaceBackground = document.getElementById('replaceBackground') as HTMLInputElement
+
+  replaceBackground.addEventListener('change', (event) => {
+    const backgroundInput = document.getElementById('backgroundInput') as HTMLInputElement
+    if (event.target.checked){
+      backgroundInput.removeAttribute('hidden')
+      backgroundInput.setAttribute('required', 'true')
+    }
+    else{
+      backgroundInput.removeAttribute('required')
+      backgroundInput.setAttribute('hidden', 'true')
+    }
+  })
+</script>
