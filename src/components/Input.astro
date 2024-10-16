@@ -1,0 +1,24 @@
+---
+const {type='text', isRequired=false, placeholder='', id=''} = Astro.props
+---
+
+<input id={id} type={type} placeholder={placeholder} required={isRequired}>
+
+<style>
+  input{
+		background-color: var(--neutral-dark);
+		font: inherit;
+		padding: 14px 16px 14px 16px;
+		border: none;
+		border-radius: 12px;
+	}
+
+	input:focus{
+		outline: 1px solid var(--accent);
+		caret-color: var(--neutral-light);
+	}
+
+	input::placeholder {
+    color: var(--neutral-medium); /* Cambia este valor al color que desees */
+  }
+</style>
