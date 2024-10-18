@@ -12,20 +12,6 @@ import spidermanCostume from '@examples/spiderman_costume.jpg';
 import skeletonCostume from '@examples/skeleton_costume.jpg';
 import vampireCostume from '@examples/vampire_costume.jpg';
 
-import { getCldImageUrl } from "astro-cloudinary/helpers"
-
-import Layout from "../layouts/Layout.astro"
-
-import ExampleButton from "@components/ExampleButton.astro"
-import CostumeForm from "@components/CostumeForm.astro"
-
-const { searchParams } = Astro.url
-const id = searchParams.get("id")
-
-if (id == null) return Astro.redirect("/")
-
-const url = getCldImageUrl({ src: id })
-
 const costumeExamples = [
   { src: pirateCostume, name: "Pirate", alt: "" },
   { src: angelCostume, name: "Angel", alt: "" },
@@ -40,6 +26,22 @@ const costumeExamples = [
   { src: skeletonCostume, name: "Skeleton", alt: "" },
   { src: vampireCostume, name: "Vampire", alt: "" },
 ]
+
+import { getCldImageUrl } from "astro-cloudinary/helpers"
+
+import Layout from "@layouts/Layout.astro"
+
+import ExampleButton from "@components/ExampleButton.astro"
+import CostumeForm from "@components/CostumeForm.astro"
+import CostumeImage from '@components/CostumeImage.astro';
+
+const { searchParams } = Astro.url
+const id = searchParams.get("id")
+
+if (id == null) return Astro.redirect("/")
+
+const url = getCldImageUrl({ src: id })
+
 ---
 
 <Layout title="Cloudinary Photo">
@@ -123,7 +125,7 @@ const costumeExamples = [
 </style>
 
 <script>
-  import { applyTransformationToImage } from "../helpers/applyTransformationToImage"
+  import { applyTransformationToImage } from "@helpers/applyTransformationToImage"
 
   const id = document.querySelector("main")?.getAttribute("data-id") ?? ""
   const imgToTransform = document.getElementById("transformation") as HTMLImageElement
