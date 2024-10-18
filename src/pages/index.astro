@@ -1,6 +1,6 @@
 ---
 import 'dotenv/config'
-import Layout from "@layouts/Layout.astro"
+import Layout from "../layouts/Layout.astro"
 import { CldUploadWidget, CldImage } from "astro-cloudinary"
 
 import { getCollection } from "astro:content"
@@ -98,10 +98,6 @@ const images = await getCollection("images")
       gap: 4px;
       list-style: none;
     }
-
-    img {
-    max-width: 100%;
-  }
   </style>
 
   <script></script>

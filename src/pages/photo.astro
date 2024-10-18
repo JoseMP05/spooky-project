@@ -60,9 +60,7 @@ const url = getCldImageUrl({ src: id })
       </section>
     </div>
     <div class="result">
-      <article>
-        <img id="transformation" src={url} alt="" width="500px">
-      </article>
+      <CostumeImage url={url} />
     </div>
     <div class="share">
       <section>
@@ -94,7 +92,7 @@ const url = getCldImageUrl({ src: id })
     justify-items: center;
     max-width: 1200px;
     margin-inline: auto;
-    gap: 32px;
+    gap: 48px;
     transition: grid-template-columns 0.25s;
   }
 
@@ -102,15 +100,6 @@ const url = getCldImageUrl({ src: id })
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
     gap: 12px;
-  }
-
-  article {
-    position: sticky;
-    top: 32px;
-    
-    img{
-      border-radius: 8px;
-    }
   }
 
   .share{

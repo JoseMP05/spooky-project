@@ -5,6 +5,8 @@
     "paths": {
       "@examples/*": ["src/assets/examples/*"],
       "@components/*": ["src/components/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@helpers/*": ["src/helpers/*"],
     }
   }
 }

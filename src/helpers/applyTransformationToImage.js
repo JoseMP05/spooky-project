@@ -1,5 +1,6 @@
 import { pollForProcessingImage } from '@cloudinary-util/util'
 import { getCldImageUrl } from "astro-cloudinary/helpers"
+import { animate, stagger, timeline } from "motion"
 
 export async function applyTransformationToImage({id, imgToTransform, costumeTopic, backgroundTopic}) {
   if (costumeTopic === null) return
@@ -13,9 +14,7 @@ export async function applyTransformationToImage({id, imgToTransform, costumeTop
 
   const url = getCldImageUrl(transformationsSettings)
 
-  //Change utility
-  imgToTransform.style.opacity = ".3"
-
+  // loadingImage()
   const isProcessed = await pollForProcessingImage({ src: url })
 
   if (isProcessed) imgToTransform.src = url
@@ -25,5 +24,5 @@ export async function applyTransformationToImage({id, imgToTransform, costumeTop
     imgToTransform.style.opacity = "1"
   }
 
-  return {src: url}
+  // return {src: url}
 }
