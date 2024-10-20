@@ -38,7 +38,7 @@ import CostumeImage from '@components/CostumeImage.astro';
 const { searchParams } = Astro.url
 const id = searchParams.get("id")
 
-if (id == null) return Astro.redirect("/")
+if (id == null) Astro.redirect("/")
 
 const url = getCldImageUrl({ src: id })
 
@@ -88,12 +88,13 @@ const url = getCldImageUrl({ src: id })
 <style>
   main {
     display: grid;
-    grid-template-columns: 1fr 1fr 0px;
+    grid-template-columns: 1fr 1fr 0fr;
     justify-items: center;
+    justify-content: center;
     max-width: 1200px;
     margin-inline: auto;
     gap: 48px;
-    transition: grid-template-columns 0.25s;
+    transition: grid-template-columns 0.5s;
   }
 
   .examples__container{
@@ -107,39 +108,60 @@ const url = getCldImageUrl({ src: id })
 
     section{
       opacity: 0;
-      visibility: hidden
-      ;
+      visibility: hidden;
     }
   }
 </style>
 
 <script>
   import { applyTransformationToImage } from "@helpers/applyTransformationToImage"
+  import { processImage } from "@helpers/processImage"
+  import { animationLoadImage, animationShowImage } from "@utils/utils.js"
 
   const id = document.querySelector("main")?.getAttribute("data-id") ?? ""
   const imgToTransform = document.getElementById("transformation") as HTMLImageElement
   const buttons = document.querySelectorAll(".examples__buttons")
   const costumeForm = document.getElementById("costumeForm") as HTMLButtonElement
   
-  costumeForm.addEventListener('submit', event => {
+  costumeForm.addEventListener('submit', async event => {
     event.preventDefault()
     
     const costumeTopic = document.getElementById('wearInput') as HTMLInputElement
     const backgroundTopic = document.getElementById('backgroundInput') as HTMLInputElement
-    applyTransformationToImage({
+    const animationPromise = animationLoadImage()
+    const newUrlImg = await applyTransformationToImage({
       id, 
       imgToTransform, 
       costumeTopic: costumeTopic.value, 
       backgroundTopic: backgroundTopic.value
     })
+
+    processAndAnimateImage({newUrlImg, imgToTransform, animationPromise})
   })
     
     buttons.forEach((button) => {
-      button.addEventListener("click", (e) => {
+      button.addEventListener("click", async (e) => {
         const costumeTopic = button.getAttribute("data-topic")
-        applyTransformationToImage({id, costumeTopic, imgToTransform})
+        const animationPromise = animationLoadImage()
+        const newUrlImg = await applyTransformationToImage({id, costumeTopic, imgToTransform})
+        
+        processAndAnimateImage({newUrlImg, imgToTransform, animationPromise})
       })
     })
+
+  async function processAndAnimateImage({newUrlImg, imgToTransform, animationPromise}) {
+    const isProcessed = await processImage(newUrlImg.src)
+
+    if (isProcessed) {
+      const idAnimation = await animationPromise
+      clearInterval(idAnimation)
+
+      imgToTransform.src = newUrlImg.src
+      imgToTransform.onload = () => {
+        animationShowImage()
+      }
+    }
+  }
     
   // const downloadButton = document.querySelector(".download") as HTMLButtonElement
   // downloadButton.addEventListener("click", (e) => {
