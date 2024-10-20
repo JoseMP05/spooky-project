@@ -81,9 +81,14 @@ export async function animationLoadImage() {
 export function animationShowImage() {
   document.getElementById("appLayout").style.gridTemplateColumns = "0fr 1fr 1fr"
   const control = timeline(secuenceImageLoaded, { delay: 0.5 })
-  // const animationFinished = await control.finished
-  
-  // const glow = document.querySelector(".glow")
-  // animate(glow, {opacity: 1}, {duration: 0.25})
+}
 
+export async function createImageDownloadLink({imgSrc, name}) {
+  const img = await fetch(imgSrc)
+  const imgBlog = await img.blob()
+  const imgURL = URL.createObjectURL(imgBlog)
+
+  const link = document.querySelector("#download")
+  link.href = imgURL
+  link.download = `${name}.jpg`
 }
