@@ -123,6 +123,7 @@ const url = getCldImageUrl({ src: id })
     })
 
     processAndAnimateImage({src: newUrlImg.src, imgToTransform, animationPromise})
+    createImageDownloadLink({imgSrc: newUrlImg.src, name: costumeTopic})
   })
     
     buttons.forEach((button) => {
@@ -147,6 +148,7 @@ const url = getCldImageUrl({ src: id })
       imgToTransform.onload = () => {
         animationShowImage()
       }
+      
     }
   }
     

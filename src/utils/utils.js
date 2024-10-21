@@ -1,7 +1,7 @@
 import { animate, timeline } from "motion"
 import { separate } from "flubber";
 import { sequenceImageLoading, secuenceImageLoaded } from "@utils/animationSecuencies"
-import { paths, text } from "@assets/svgs/horror_content.js";
+import { paths, text } from "@utils/content.js";
 
 export function getRandomArbitrary(min, max) {
   //max is exclusive
