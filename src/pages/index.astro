@@ -71,10 +71,12 @@ const images = await getCollection("images")
   }
 
   section{
+    position: relative;
+    top: -33px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    min-height: 100vh;
+    min-height: calc(100vh - 65px);
     gap: 48px;
   }
   
@@ -109,7 +111,7 @@ const images = await getCollection("images")
   }
 
   .hero__content{
-    max-width: 450px;
+    max-width: 500px;
     padding: 24px;
   }
 

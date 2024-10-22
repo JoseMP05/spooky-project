@@ -1,0 +1,50 @@
+---
+import NoCopy from "@components/svgs/NoCopy.astro"
+---
+
+<footer>
+  <small>
+    <span>Developed by Jose Miguel Pulgarin Agudelo</span>
+    <div>
+      <a href="https://www.linkedin.com/in/jose-miguel-pulgarin/" target="_blank">LinkedIn
+      </a>
+      <a href="https://github.com/JoseMP05" target="_blank">GitHub
+      </a>
+    </div>
+  </small>
+  <small>All rights almost reserved 
+    <NoCopy>
+  </small>
+</footer>
+
+<style>
+  footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+    margin: 24px auto 12px;
+  }
+
+  small:first-child{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  small:last-child{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  div{
+    display: flex;
+    gap: 12px;
+  }
+
+  small a{
+    text-decoration: underline;
+  }
+</style>
