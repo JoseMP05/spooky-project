@@ -42,9 +42,7 @@ const id = searchParams.get("id")
 if (id == null) Astro.redirect("/")
 
 const url = getCldImageUrl({ src: id })
-
 ---
-
 <Layout title="Cloudinary Photo">
   <main data-id={id} id="appLayout">
     <div class="interactive">
@@ -67,13 +65,15 @@ const url = getCldImageUrl({ src: id })
       <ShareAndDownload/>
     </div>
   </main>
+  <!-- testing video-->
+  <video autoplay style="display: block; margin: 0 auto;">   
+    <source src="videos/TheRing.webm" type="video/webm" />
+    <source src="videos/TheRing.mp4" type="video/mp4" />
+  </video>
 </Layout>
 
 <style>
 
-  nav{
-      margin-right: 48px; /*Faking to center due to gap in main */
-  }
   main {
     display: grid;
     grid-template-columns: 1fr 1fr 0fr;
@@ -128,6 +128,7 @@ const url = getCldImageUrl({ src: id })
     const costumeTopic = document.getElementById('wearInput') as HTMLInputElement
     const backgroundTopic = document.getElementById('backgroundInput') as HTMLInputElement
     const animationPromise = animationLoadImage()
+    window.scrollTo(0, 65)
     const newUrlImg = await applyTransformationToImage({
       id, 
       imgToTransform, 
@@ -143,6 +144,7 @@ const url = getCldImageUrl({ src: id })
       button.addEventListener("click", async (e) => {
         const costumeTopic = button.getAttribute("data-topic")
         const animationPromise = animationLoadImage()
+        window.scrollTo(0, 65)
         const newUrlImg = await applyTransformationToImage({id, costumeTopic, imgToTransform})
     
         await processAndAnimateImage({src: newUrlImg.src, imgToTransform, animationPromise})
@@ -164,14 +166,4 @@ const url = getCldImageUrl({ src: id })
       
     }
   }
-    
-  // const downloadButton = document.querySelector(".download") as HTMLButtonElement
-  // downloadButton.addEventListener("click", (e) => {
-  //   const url = getCldImageUrl({ src: id, format: "avif" })
-
-  //   const a = document.createElement("a")
-  //   a.href = url
-  //   a.download = "image.avif"
-  //   a.click()
-  // })
 </script>
