@@ -1,0 +1,56 @@
+---
+import { CldUploadWidget } from "astro-cloudinary"
+import Button from '@components/Button.astro'
+
+---
+
+<CldUploadWidget
+  id="upload-widget"
+  uploadPreset="spooky-hackaton-unsigned-images"
+  options={{
+    sources: ["local", "camera", "url"],
+    multiple: false,
+    maxFiles: 1,
+    language: "es",
+    text: {
+      es: {
+        or: "O",
+        menu: {
+          files: "Subir desde tu dispositivo",
+          camera: "Cámara",
+        },
+        local: {
+          browse: "Seleccionar",
+          dd_title_single: "Arrastra tu imagen aquí",
+        },
+        camera: {
+          take_pic: "Toma una foto y subela",
+          cancel: "Cancel",
+          explanation: "Asegúrate de que tu cámara esté conectada y que tu navegador permita la captura de la cámara. Cuando estés listo, haz clic en Capturar.",
+          camera_error: "Error al acceder a la cámara",
+          retry: "Reintentar cámara",
+        },
+        url: {
+            inner_title: "URL pública del archivo a subir:",
+        },
+      },
+    },
+  }}
+>
+  <Button text="Wear Costume">Upload</Button>
+</CldUploadWidget>
+
+<script>
+  import { navigate } from "astro:transitions/client"
+
+  const widget = document.getElementById("upload-widget")
+
+  if (widget) {
+    widget.addEventListener("clduploadwidget:success", ((
+      e: CustomEvent<{ info: { public_id: string } }>
+    ) => {
+      const publicId = e.detail.info.public_id
+      navigate(`/photo?id=${publicId}`)
+    }) as EventListener)
+  }
+</script>

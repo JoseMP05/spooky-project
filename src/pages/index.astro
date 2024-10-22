@@ -1,51 +1,36 @@
 ---
 import 'dotenv/config'
-import Layout from "../layouts/Layout.astro"
+import Layout from "@layouts/Layout.astro"
 import { CldUploadWidget, CldImage } from "astro-cloudinary"
+import sampleImage from "@assets/img/sample-costume.png"
+import CldUploadWidgetSettings from "@components/CldUploadWidgetSettings.astro"
+import {Image} from "astro:assets"
 
-import { getCollection } from "astro:content"
-const images = await getCollection("images")
+// import { getCollection } from "astro:content"
+// const images = await getCollection("images")
 ---
 
 <Layout title="Cloudinary Hackathon">
   <main>
-    <h1> Hackathon Cloudinary </h1>
-    <CldUploadWidget
-      id="upload-widget"
-      uploadPreset="spooky-hackaton-unsigned-images"
-      options={{
-        sources: ["local", "camera", "url"],
-        multiple: false,
-        maxFiles: 1,
-        language: "es",
-        text: {
-          es: {
-            or: "O",
-            menu: {
-              files: "Subir desde tu dispositivo",
-              camera: "Cámara",
-            },
-            local: {
-              browse: "Seleccionar",
-              dd_title_single: "Arrastra tu imagen aquí",
-            },
-            camera: {
-              take_pic: "Toma una foto y subela",
-              cancel: "Cancel",
-              explanation: "Asegúrate de que tu cámara esté conectada y que tu navegador permita la captura de la cámara. Cuando estés listo, haz clic en Capturar.",
-              camera_error: "Error al acceder a la cámara",
-              retry: "Reintentar cámara",
-            },
-            url: {
-                inner_title: "URL pública del archivo a subir:",
-            },
-          },
-        },
-      }}
-    >
-      <button>Upload</button>
-    </CldUploadWidget>
-    <ul>
+    <section class="hero">
+        <div class="hero__content">
+          <div class="hero__title">
+            <h1>HalloWear</h1>
+            <h2>Transform your image and discover your next costume!</h2>
+          </div>
+          
+          <div class="hero__description">
+            <p>Upload your photo and explore a variety of costumes to see how you'd look this Halloween</p>
+          <CldUploadWidgetSettings/>
+        </div>
+      </div>
+      
+      <div class="hero__img">
+        <Image src={sampleImage} alt="Comparison of a man dressed casually and dressed as Spiderman generated with HalloWear"/>
+      </div>
+    </section>
+  
+    <!-- <ul>
       {
         images.map((image) => {
           return (
@@ -62,34 +47,31 @@ const images = await getCollection("images")
           )
         })
       }
-    </ul>
+    </ul> -->
   </main>
-
-  <script>
-    import { navigate } from "astro:transitions/client"
-
-    const widget = document.getElementById("upload-widget")
-
-    if (widget) {
-      widget.addEventListener("clduploadwidget:success", ((
-        e: CustomEvent<{ info: { public_id: string } }>
-      ) => {
-        const publicId = e.detail.info.public_id
-        navigate(`/photo?id=${publicId}`)
-      }) as EventListener)
-    }
-  </script>
 
   <style>
     main {
-      width: 800px;
+      display: ;
       margin: 0 auto;
       padding-top: 100px;
       text-align: center;
     }
 
+    section{
+      display: flex;
+
+    }
+
+    h1{
+      font-size: clamp(5rem, 8vw, 8rem);
+      font-family: 'HalloweenSpooky', 'SourceSans3', system-ui, sans-serif;
+      margin-bottom: 16px;
+    }
+
     h2 {
       margin-bottom: 32px;
+      font-weight: 500;
     }
 
     ul {

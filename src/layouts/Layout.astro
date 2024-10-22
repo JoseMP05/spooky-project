@@ -25,6 +25,14 @@ const { title } = Astro.props;
 		font-display: swap;
 	}
 
+	@font-face {
+		font-family: 'SourceSans3';
+		src: url('/fonts/SourceSans3-Variable.woff2') format('woff2');
+		font-weight: 100 900;
+		font-style: normal;
+		font-display: swap;
+	}
+	
 	:root {
 		--accent: #FF6500;
 		--neutral-light: #FFFCF2;
@@ -38,13 +46,17 @@ const { title } = Astro.props;
 	}
 
 	html {
-		font-family: system-ui, sans-serif;
+		font-family: 'SourceSans3', system-ui, sans-serif;
 		background: var(--background);
 		color: var(--neutral-medium);
 	}
 
 	body {
 		margin: 0;
+	}
+
+	main{
+		max-width: 1200px;
 	}
 	
 	img {

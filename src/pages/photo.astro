@@ -1,16 +1,16 @@
 ---
-import pirateCostume from '@examples/pirate_costume.jpg';
-import angelCostume from '@examples/angel_costume.jpg';
-import chuckyCostume from '@examples/chucky_costume.jpg';
-import devilCostume from '@examples/devil_costume.jpg';
-import astronautCostume from '@examples/astronaut_costume.jpg';
-import marioCostume from '@examples/mario_costume.jpg';
-import princessCostume from '@examples/princess_costume.jpg';
-import scaryClownCostume from '@examples/scary-clown_costume.jpg';
-import shrekCostume from '@examples/shrek_costume.jpg';
-import spidermanCostume from '@examples/spiderman_costume.jpg';
-import skeletonCostume from '@examples/skeleton_costume.jpg';
-import vampireCostume from '@examples/vampire_costume.jpg';
+import pirateCostume from '@examples/pirate_costume.jpg'
+import angelCostume from '@examples/angel_costume.jpg'
+import chuckyCostume from '@examples/chucky_costume.jpg'
+import devilCostume from '@examples/devil_costume.jpg'
+import astronautCostume from '@examples/astronaut_costume.jpg'
+import marioCostume from '@examples/mario_costume.jpg'
+import princessCostume from '@examples/princess_costume.jpg'
+import scaryClownCostume from '@examples/scary-clown_costume.jpg'
+import shrekCostume from '@examples/shrek_costume.jpg'
+import spidermanCostume from '@examples/spiderman_costume.jpg'
+import skeletonCostume from '@examples/skeleton_costume.jpg'
+import vampireCostume from '@examples/vampire_costume.jpg'
 
 const costumeExamples = [
   { src: pirateCostume, name: "Pirate", alt: "" },
@@ -33,8 +33,8 @@ import Layout from "@layouts/Layout.astro"
 
 import ExampleButton from "@components/ExampleButton.astro"
 import CostumeForm from "@components/CostumeForm.astro"
-import CostumeImage from '@components/CostumeImage.astro';
-import ShareAndDownload from '@components/ShareAndDownload.astro';
+import CostumeImage from '@components/CostumeImage.astro'
+import ShareAndDownload from '@components/ShareAndDownload.astro'
 
 const { searchParams } = Astro.url
 const id = searchParams.get("id")
@@ -75,10 +75,14 @@ const url = getCldImageUrl({ src: id })
     grid-template-columns: 1fr 1fr 0fr;
     justify-items: center;
     justify-content: center;
-    max-width: 1200px;
+    /* align-items: center; */
     margin-inline: auto;
     gap: 48px;
     transition: grid-template-columns 0.5s;
+  }
+  
+  .interactive{
+    width: 100%;
   }
 
   .examples__container{

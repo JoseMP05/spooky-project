@@ -57,6 +57,6 @@ export const text = {
   ]
 }
 
-const shareLinks = {
-  x: https://x.com/intent/tweet?url=${url}&text=Hey! Check out my new costume😈&hashtags=HalloWear
-}
+// const shareLinks = {
+//   x: https://x.com/intent/tweet?url=${url}&text=Hey! Check out my new costume😈&hashtags=HalloWear
+// }
