@@ -54,7 +54,7 @@ function createPhraseToggler(phrases, initialPhrase) {
 }
 
 export async function animationLoadImage() {
-  const path = document.querySelector("path");
+  const path = document.getElementById("iconLoader");
   path.setAttribute("d", paths.voodoo.d);
   const togglePath = createPathToggler(paths, 'voodoo')
 
