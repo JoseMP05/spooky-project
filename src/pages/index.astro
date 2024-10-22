@@ -9,8 +9,9 @@ import SpiderWeb from "@components/svgs/SpiderWeb.astro"
 import Layout from "@layouts/Layout.astro"
 import CldUploadWidgetSettings from "@components/CldUploadWidgetSettings.astro"
 
-// import { getCollection } from "astro:content"
-// const images = await getCollection("images")
+import { getCollection } from "astro:content"
+import { CldImage } from "astro-cloudinary"
+const images = await getCollection("images")
 ---
 
 <Layout title="Cloudinary Hackathon">
@@ -39,7 +40,7 @@ import CldUploadWidgetSettings from "@components/CldUploadWidgetSettings.astro"
     <div class="spider-web" aria-hidden="true">
       <SpiderWeb/>
     </div>
-    <!-- <ul>
+    <ul>
       {
         images.map((image) => {
           return (
@@ -56,7 +57,7 @@ import CldUploadWidgetSettings from "@components/CldUploadWidgetSettings.astro"
           )
         })
       }
-    </ul> -->
+    </ul>
   </main>
 
 <style>
@@ -156,12 +157,12 @@ import CldUploadWidgetSettings from "@components/CldUploadWidgetSettings.astro"
     opacity: 0.3;
   }
 
-  /* ul {
+  ul {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4px;
     list-style: none;
-  } */
+  }
 
 </style>
 

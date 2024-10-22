@@ -70,12 +70,16 @@ const url = getCldImageUrl({ src: id })
 </Layout>
 
 <style>
+
+  nav{
+      margin-right: 48px; /*Faking to center due to gap in main */
+  }
   main {
     display: grid;
     grid-template-columns: 1fr 1fr 0fr;
     justify-items: center;
     justify-content: center;
-    /* align-items: center; */
+    align-items: center;
     margin-inline: auto;
     gap: 48px;
     transition: grid-template-columns 0.5s;
@@ -91,10 +95,15 @@ const url = getCldImageUrl({ src: id })
     gap: 12px;
   }
 
+  .result{
+    height: 100%;
+  }
+
   .share{
     min-width: 0px;
-    width: 100%;
+    width: 100%; 
     max-width: 500px;
+    height: 100%;
 
     section{
       opacity: 0;
