@@ -1,12 +1,10 @@
 ---
-import { Image } from "astro:assets"
-
 const {class: className, src, name} = Astro.props
 ---
 
 <button class={className} data-topic={name}>
   <div>
-    <Image src={src} alt="" />
+    <img src={src} alt="" />
   </div>
   <span>{name}</span>
 </button>
