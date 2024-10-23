@@ -36,7 +36,7 @@ export const secuenceImageLoaded = [
   //   },
   // ],
   [".share", 
-    { minWidth: "auto"}, 
+    { minWidth: "auto", width: "100%"}, 
     { duration: 0.001, at:"-0.25"}
   ],
   [".overlay",
@@ -46,7 +46,7 @@ export const secuenceImageLoaded = [
     {duration: 0.25, at:"<"}
   ],
   [".share section", 
-    { opacity: 1, visibility: 'visible' }, 
+    { display: 'block', opacity: 1, visibility: 'visible'}, 
     { duration: 0.25, at:"<"}
   ]
 ]
