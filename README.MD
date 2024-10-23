@@ -1,8 +1,18 @@
 # HalloWear 🎃
 
-Welcome to **HalloWear**, an application where you can discover how you would look in your desired costume by simply uploading an image and providing a prompt. Additionally, you have the option to write a prompt to change the background of your image, creating an even more immersive visual experience.
+Welcome to **HalloWear**, an application where you can discover how you would look in your desired costume by simply uploading an image and providing a prompt. Additionally, you have the option to write a prompt to change the background of your image, creating an even more immersive visual experience. **Maybe you'll get a scare along the way ;)**
+
 
 This project is part of the initiative to participate in the [**Cloudinary CloudCreate: Spooky AI Hackathon**](https://cloudinary.com/blog/cloudinary-cloudcreate-spooky-ai-hackathon), organized by **Cloudinary** and **Miguel Ángel Durán ([Midudev](https://github.com/midudev))**.
+
+## Spoiler Alert ⚠️
+
+If you choose to write your own prompt in the form, you will notice that nothing happens on the first click of 'Wear'. This is completely intentional.
+
+On the second click, an overlay will appear on the screen, creating a brief moment of suspense for 2 seconds, and then a legendary horror video will play.
+
+This little easter egg only runs once per session to avoid being annoying. I hope someone likes it.
+
 
 ## Installation
 
