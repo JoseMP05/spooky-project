@@ -5,15 +5,10 @@ import sampleImage from "@assets/img/sample-costume.png"
 import Moon from "@components/svgs/Moon.astro"
 import SpiderWeb from "@components/svgs/SpiderWeb.astro"
 
-
 import Layout from "@layouts/Layout.astro"
 import CldUploadWidgetSettings from "@components/CldUploadWidgetSettings.astro"
 
-import { getCollection } from "astro:content"
-import { CldImage } from "astro-cloudinary"
-const images = await getCollection("images")
 ---
-
 <Layout title="HalloWear - Get your favorite costume">
   <main>
     <div class="moon" aria-hidden="true">
@@ -40,24 +35,6 @@ const images = await getCollection("images")
     <div class="spider-web" aria-hidden="true">
       <SpiderWeb/>
     </div>
-    <ul>
-      {
-        images.map((image) => {
-          return (
-            <li>
-              <a href={`/photo?id=${image.data.public_id}`}>
-                <CldImage
-                  src={image.data.public_id}
-                  width={250}
-                  height={250}
-                  preserveTransformations={true}
-                />
-              </a>
-            </li>
-          )
-        })
-      }
-    </ul>
   </main>
 
 <style>
