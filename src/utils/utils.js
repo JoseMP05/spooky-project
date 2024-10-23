@@ -111,8 +111,8 @@ export async function activateVideo(){
   sourceWebm.type = 'video/webm'
 
   const sourceMp4 = document.createElement('source')
-  sourceWebm.src = videoSources.mp4
-  sourceWebm.type = 'video/mp4'
+  sourceMp4.src = videoSources.mp4
+  sourceMp4.type = 'video/mp4'
 
   video.appendChild(sourceMp4)
   video.appendChild(sourceWebm)
