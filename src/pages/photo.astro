@@ -1,48 +1,49 @@
 ---
-import pirateCostume from '@examples/pirate_costume.jpg';
-import angelCostume from '@examples/angel_costume.jpg';
-import chuckyCostume from '@examples/chucky_costume.jpg';
-import devilCostume from '@examples/devil_costume.jpg';
-import astronautCostume from '@examples/astronaut_costume.jpg';
-import marioCostume from '@examples/mario_costume.jpg';
-import princessCostume from '@examples/princess_costume.jpg';
-import scaryClownCostume from '@examples/scary-clown_costume.jpg';
-import shrekCostume from '@examples/shrek_costume.jpg';
-import spidermanCostume from '@examples/spiderman_costume.jpg';
-import skeletonCostume from '@examples/skeleton_costume.jpg';
-import vampireCostume from '@examples/vampire_costume.jpg';
+import pirateCostume from '@examples/pirate_costume.webp'
+import angelCostume from '@examples/angel_costume.webp'
+import chuckyCostume from '@examples/chucky_costume.webp'
+import devilCostume from '@examples/devil_costume.webp'
+import astronautCostume from '@examples/astronaut_costume.webp'
+import marioCostume from '@examples/mario_costume.webp'
+import princessCostume from '@examples/princess_costume.webp'
+import scaryClownCostume from '@examples/scary-clown_costume.webp'
+import shrekCostume from '@examples/shrek_costume.webp'
+import spidermanCostume from '@examples/spiderman_costume.webp'
+import skeletonCostume from '@examples/skeleton_costume.webp'
+import vampireCostume from '@examples/vampire_costume.webp'
+
+const costumeExamples = [
+  { src: pirateCostume.src, name: "Pirate", alt: "" },
+  { src: angelCostume.src, name: "Angel", alt: "" },
+  { src: chuckyCostume.src, name: "Chucky", alt: "" },
+  { src: devilCostume.src, name: "Devil", alt: "" },
+  { src: astronautCostume.src, name: "Astronaut", alt: "" },
+  { src: marioCostume.src, name: "Mario Mario", alt: "" },
+  { src: princessCostume.src, name: "Princess", alt: "" },
+  { src: scaryClownCostume.src, name: "Scary Clown", alt: "" },
+  { src: shrekCostume.src, name: "Shrek", alt: "" },
+  { src: spidermanCostume.src, name: "Spiderman", alt: "" },
+  { src: skeletonCostume.src, name: "Skeleton", alt: "" },
+  { src: vampireCostume.src, name: "Vampire", alt: "" },
+]
 
 import { getCldImageUrl } from "astro-cloudinary/helpers"
 
-import Layout from "../layouts/Layout.astro"
+import Layout from "@layouts/Layout.astro"
 
 import ExampleButton from "@components/ExampleButton.astro"
 import CostumeForm from "@components/CostumeForm.astro"
+import CostumeImage from '@components/CostumeImage.astro'
+import Download from '@components/Download.astro'
 
 const { searchParams } = Astro.url
 const id = searchParams.get("id")
 
-if (id == null) return Astro.redirect("/")
+if (id == null) Astro.redirect("/")
 
 const url = getCldImageUrl({ src: id })
-
-const costumeExamples = [
-  { src: pirateCostume, name: "Pirate", alt: "" },
-  { src: angelCostume, name: "Angel", alt: "" },
-  { src: chuckyCostume, name: "Chucky", alt: "" },
-  { src: devilCostume, name: "Devil", alt: "" },
-  { src: astronautCostume, name: "Astronaut", alt: "" },
-  { src: marioCostume, name: "Mario Mario", alt: "" },
-  { src: princessCostume, name: "Princess", alt: "" },
-  { src: scaryClownCostume, name: "Scary Clown", alt: "" },
-  { src: shrekCostume, name: "Shrek", alt: "" },
-  { src: spidermanCostume, name: "Spiderman", alt: "" },
-  { src: skeletonCostume, name: "Skeleton", alt: "" },
-  { src: vampireCostume, name: "Vampire", alt: "" },
-]
 ---
-
-<Layout title="Cloudinary Photo">
+<Layout title="Choose Your Costume: Explore and Transform Your Image">
   <main data-id={id} id="appLayout">
     <div class="interactive">
       <section class="costume-form">
@@ -58,42 +59,29 @@ const costumeExamples = [
       </section>
     </div>
     <div class="result">
-      <article>
-        <img id="transformation" src={url} alt="" width="500px">
-      </article>
+      <CostumeImage url={url} />
     </div>
     <div class="share">
-      <section>
-        <h1>Share your scary costume!</h1>
-        <div>
-          <button>discord</button>
-          <button>Instagram</button>
-    
-          <button>Whatsapp</button>
-          <button>X / Twitter</button>
-        </div>
-      </section>
-      <section>
-        <h2>Take your costume with you</h2>
-        <button>Download</button>
-      </section>
-      <section>
-        <h2>Keep exploring!</h2>
-        <button>Wear Another Costume</button>
-      </section>
+      <Download/>
     </div>
   </main>
 </Layout>
 
 <style>
+
   main {
     display: grid;
-    grid-template-columns: 1fr 1fr 0px;
+    grid-template-columns: 1fr 1fr 0fr;
     justify-items: center;
-    max-width: 1200px;
+    justify-content: center;
+    align-items: center;
     margin-inline: auto;
-    gap: 32px;
-    transition: grid-template-columns 0.25s;
+    gap: 48px;
+    transition: grid-template-columns 0.5s;
+  }
+  
+  .interactive{
+    width: 100%;
   }
 
   .examples__container{
@@ -102,61 +90,76 @@ const costumeExamples = [
     gap: 12px;
   }
 
-  article {
-    position: sticky;
-    top: 32px;
-    
-    img{
-      border-radius: 8px;
-    }
+  .result{
+    height: 100%;
   }
 
   .share{
     min-width: 0px;
-
+    /* width: 100%;  */
+    max-width: 500px;
+    height: 100%;
+    
     section{
+      display: none;
       opacity: 0;
-      visibility: hidden
-      ;
+      visibility: hidden;
     }
   }
 </style>
 
 <script>
-  import { applyTransformationToImage } from "../helpers/applyTransformationToImage"
+  import { applyTransformationToImage } from "@helpers/applyTransformationToImage"
+  import { processImage } from "@helpers/processImage"
+  import { animationLoadImage, animationShowImage, createImageDownloadLink } from "@utils/utils.js"
 
   const id = document.querySelector("main")?.getAttribute("data-id") ?? ""
   const imgToTransform = document.getElementById("transformation") as HTMLImageElement
   const buttons = document.querySelectorAll(".examples__buttons")
   const costumeForm = document.getElementById("costumeForm") as HTMLButtonElement
   
-  costumeForm.addEventListener('submit', event => {
+  costumeForm.addEventListener('submit', async event => {
     event.preventDefault()
     
     const costumeTopic = document.getElementById('wearInput') as HTMLInputElement
     const backgroundTopic = document.getElementById('backgroundInput') as HTMLInputElement
-    applyTransformationToImage({
+    const animationPromise = animationLoadImage()
+    window.scrollTo(0, 65)
+    const newUrlImg = await applyTransformationToImage({
       id, 
       imgToTransform, 
       costumeTopic: costumeTopic.value, 
       backgroundTopic: backgroundTopic.value
     })
+
+    processAndAnimateImage({src: newUrlImg.src, imgToTransform, animationPromise})
+    createImageDownloadLink({imgSrc: newUrlImg.src, name: costumeTopic})
   })
     
     buttons.forEach((button) => {
-      button.addEventListener("click", (e) => {
+      button.addEventListener("click", async (e) => {
         const costumeTopic = button.getAttribute("data-topic")
-        applyTransformationToImage({id, costumeTopic, imgToTransform})
+        const animationPromise = animationLoadImage()
+        window.scrollTo(0, 65)
+        const newUrlImg = await applyTransformationToImage({id, costumeTopic, imgToTransform})
+    
+        await processAndAnimateImage({src: newUrlImg.src, imgToTransform, animationPromise})
+        createImageDownloadLink({imgSrc: newUrlImg.src, name: costumeTopic})
       })
     })
-    
-  // const downloadButton = document.querySelector(".download") as HTMLButtonElement
-  // downloadButton.addEventListener("click", (e) => {
-  //   const url = getCldImageUrl({ src: id, format: "avif" })
 
-  //   const a = document.createElement("a")
-  //   a.href = url
-  //   a.download = "image.avif"
-  //   a.click()
-  // })
+  async function processAndAnimateImage({src, imgToTransform, animationPromise}) {
+    const isProcessed = await processImage(src)
+
+    if (isProcessed) {
+      const idAnimation = await animationPromise
+      clearInterval(idAnimation)
+
+      imgToTransform.src = src
+      imgToTransform.onload = () => {
+        animationShowImage()
+      }
+      
+    }
+  }
 </script>

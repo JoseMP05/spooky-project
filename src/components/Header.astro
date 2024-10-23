@@ -1,0 +1,39 @@
+---
+import Github from "@components/svgs/Github.astro"
+---
+<header>
+  <nav>
+    <a class="logo" href="/">HalloWear</a>
+    <a class="repo" href="https://github.com/JoseMP05/Hallowear_spooky-ai-hackathon" target="_blank">View Code
+      <Github/>
+    </a>
+  </nav>
+</header>
+
+<style>
+  header{
+    display: flex;
+    justify-content: center;
+    padding: 12px 0;
+    max-width: 400px;
+    margin: 0 auto 16px;
+  }
+  
+  nav{
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+  
+  .logo{
+    font-family: 'HalloweenSpooky', 'SourceSans3', system-ui, sans-serif;
+    font-size: 2rem;
+    padding-top: 6px;
+  }
+  
+  .repo{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+</style>

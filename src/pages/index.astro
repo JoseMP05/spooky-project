@@ -1,50 +1,45 @@
 ---
 import 'dotenv/config'
-import Layout from "../layouts/Layout.astro"
-import { CldUploadWidget, CldImage } from "astro-cloudinary"
+
+import sampleImage from "@assets/img/sample-costume.png"
+import Moon from "@components/svgs/Moon.astro"
+import SpiderWeb from "@components/svgs/SpiderWeb.astro"
+
+
+import Layout from "@layouts/Layout.astro"
+import CldUploadWidgetSettings from "@components/CldUploadWidgetSettings.astro"
 
 import { getCollection } from "astro:content"
+import { CldImage } from "astro-cloudinary"
 const images = await getCollection("images")
 ---
 
-<Layout title="Cloudinary Hackathon">
+<Layout title="HalloWear - Get your favorite costume">
   <main>
-    <h1> Hackathon Cloudinary </h1>
-    <CldUploadWidget
-      id="upload-widget"
-      uploadPreset="spooky-hackaton-unsigned-images"
-      options={{
-        sources: ["local", "camera", "url"],
-        multiple: false,
-        maxFiles: 1,
-        language: "es",
-        text: {
-          es: {
-            or: "O",
-            menu: {
-              files: "Subir desde tu dispositivo",
-              camera: "Cámara",
-            },
-            local: {
-              browse: "Seleccionar",
-              dd_title_single: "Arrastra tu imagen aquí",
-            },
-            camera: {
-              take_pic: "Toma una foto y subela",
-              cancel: "Cancel",
-              explanation: "Asegúrate de que tu cámara esté conectada y que tu navegador permita la captura de la cámara. Cuando estés listo, haz clic en Capturar.",
-              camera_error: "Error al acceder a la cámara",
-              retry: "Reintentar cámara",
-            },
-            url: {
-                inner_title: "URL pública del archivo a subir:",
-            },
-          },
-        },
-      }}
-    >
-      <button>Upload</button>
-    </CldUploadWidget>
+    <div class="moon" aria-hidden="true">
+      <div></div>
+      <Moon/>
+    </div>
+    <section class="hero">
+        <div class="hero__content">
+          <div class="hero__title">
+            <h1>HalloWear</h1>
+            <h2>Transform your image and discover your next costume!</h2>
+          </div>
+          
+          <div class="hero__description">
+            <p>Upload your photo and explore a variety of costumes to see how you'd look this Halloween</p>
+          <CldUploadWidgetSettings/>
+        </div>
+      </div>
+      
+      <div class="hero__img">
+        <img src={sampleImage.src} alt="Comparison of a man dressed casually and dressed as Spiderman generated with HalloWear"/>
+      </div>
+    </section>
+    <div class="spider-web" aria-hidden="true">
+      <SpiderWeb/>
+    </div>
     <ul>
       {
         images.map((image) => {
@@ -65,44 +60,112 @@ const images = await getCollection("images")
     </ul>
   </main>
 
-  <script>
-    import { navigate } from "astro:transitions/client"
-
-    const widget = document.getElementById("upload-widget")
-
-    if (widget) {
-      widget.addEventListener("clduploadwidget:success", ((
-        e: CustomEvent<{ info: { public_id: string } }>
-      ) => {
-        const publicId = e.detail.info.public_id
-        navigate(`/photo?id=${publicId}`)
-      }) as EventListener)
-    }
-  </script>
-
-  <style>
-    main {
-      width: 800px;
-      margin: 0 auto;
-      padding-top: 100px;
-      text-align: center;
-    }
-
-    h2 {
-      margin-bottom: 32px;
-    }
-
-    ul {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4px;
-      list-style: none;
-    }
-
-    img {
-    max-width: 100%;
+<style>
+  body{
+    position: relative;
   }
-  </style>
+  
+  main {
+    margin: 0 auto;
+    text-align: center;
+  }
 
-  <script></script>
+  section{
+    position: relative;
+    top: -33px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    min-height: calc(100vh - 65px);
+    gap: 48px;
+  }
+  
+  section > div{
+    flex-grow: 1;
+    flex-basis: 0;
+  }
+
+  h1{
+    font-size: clamp(5rem, 8vw, 8rem);
+    font-family: 'HalloweenSpooky', 'SourceSans3', system-ui, sans-serif;
+    margin-block: 0;
+    font-weight: normal;
+    filter: drop-shadow(-4px -2px 0px var(--background)) drop-shadow(1px 1px 0px var(--background));
+  }
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 32px;
+    font-weight: 500;
+    mix-blend-mode: difference;
+  }
+
+  p{
+    font-size: 1.15rem;
+    font-weight: 400;
+  }
+
+  img{
+    object-fit: contain;
+    max-height: 100%;
+  }
+
+  .hero__content{
+    max-width: 500px;
+    padding: 24px;
+  }
+
+  .hero__img{
+    max-width: 550px;
+    max-height: calc(100vh - 64px);
+  }
+
+  .moon,
+  .spider-web{
+    position: absolute;
+    z-index: -1;
+  }
+
+  .moon{
+    transform: translate(-50%, -40%);
+    padding: 64px;
+  }
+
+  .moon div{
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    z-index: -1;
+    width: 50%;
+    height: 50%;
+    border-radius: 50%;
+    background-color: var(--accent);
+    filter: blur(200px);
+    animation: scale 3s linear infinite alternate;
+  }
+
+  @keyframes scale {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(0.8);
+    }
+  }
+
+  .spider-web{
+    top: 0;
+    right: 0;
+    opacity: 0.3;
+  }
+
+  ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    list-style: none;
+  }
+
+</style>
+
 </Layout>

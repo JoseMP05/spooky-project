@@ -1,0 +1,79 @@
+---
+const {url} = Astro.props
+---
+<article>
+  <div class="container">
+    <div class="glow"></div>
+    <img id="transformation" src={url}alt="">
+    <div class="overlay">
+      <svg width="200" height="200" viewBox="0 0 200 200">
+        <g>
+          <path id="iconLoader" />
+        </g>
+      </svg>
+      <span class="overlay__text"></span>
+    </div>
+  </div>
+</article>
+
+<style>
+  article {
+    position: sticky;
+    top: 32px;
+    --border-radius: 8px;
+  }
+
+  .container{
+    position: relative;
+  }
+
+  img{
+    position: relative;
+    z-index: 10;
+    max-height: calc(100vh - 64px);
+    border-radius: var(--border-radius)
+  }
+
+  .glow,
+  .overlay{
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    border-radius: var(--border-radius)
+  }
+
+  .overlay{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    background: var(--neutral-medium);
+    z-index: 20;
+    color: var(--background);
+  }
+
+  .glow{
+    background: var(--accent);
+    filter: blur(10px);
+  }
+
+  svg{
+    fill: currentColor;
+  }
+
+  .overlay__text{
+    font-family: "HalloweenSpooky", monospace;
+    font-size: 2rem;
+    color: inherit;
+  }
+  
+</style>
+
+<script>
+  
+</script>

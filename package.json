@@ -1,5 +1,5 @@
 {
-  "name": "spooky",
+  "name": "hallowear",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
@@ -20,6 +20,7 @@
     "astro": "^4.16.0",
     "astro-cloudinary": "^1.1.0",
     "dotenv": "^16.4.5",
+    "flubber": "^0.4.2",
     "motion": "^10.18.0"
   },
   "devDependencies": {

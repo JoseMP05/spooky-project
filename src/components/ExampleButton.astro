@@ -1,12 +1,10 @@
 ---
-import { Image } from "astro:assets"
-
 const {class: className, src, name} = Astro.props
 ---
 
 <button class={className} data-topic={name}>
   <div>
-    <Image src={src} alt="" />
+    <img src={src} alt="" />
   </div>
   <span>{name}</span>
 </button>
@@ -16,7 +14,15 @@ const {class: className, src, name} = Astro.props
     width: 100%;
     text-align: start;
   }
+  
+  button:hover img {
+    filter: brightness(1.5)
+  }
 
+  button:hover span {
+    color: var(--neutral-light);
+  }
+  
   button div {
     background-color: var(--neutral-medium);
     height: auto;
@@ -25,9 +31,14 @@ const {class: className, src, name} = Astro.props
     overflow: hidden;
     margin-bottom: 8px;
   }
-
+  
   img{
     width: 100%;
     height: 100%;
+    transition: filter 0.25s;
+  }
+
+  span{
+    transition: color 0.25s;
   }
 </style>

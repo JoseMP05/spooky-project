@@ -1,0 +1,30 @@
+---
+  import Button from "@components/Button.astro"
+  import X from "@components/socialNetworksButtons/X.astro"
+  
+---
+<section class="download">
+  <h2>Take your costume with you</h2>
+  <Button id="download" text="Download" href="#"/>
+</section>
+<section class="try-again">
+  <h2>Keep exploring!</h2>
+  <Button class:list={['outline']} id="tryAnotherImg" text="Try another image" >Wear Another Costume</Button>
+</section>
+
+<style>
+  .download h2{
+    margin-top: 0;
+  }
+
+  .try-again{
+    margin-top: 32px;
+  }
+</style>
+
+<script>
+  const tryAnotherImg = document.getElementById("tryAnotherImg")
+  tryAnotherImg.addEventListener("click", () => {
+    window.location.reload()
+  })
+</script>

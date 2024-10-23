@@ -1,0 +1,79 @@
+---
+import { CldUploadWidget } from "astro-cloudinary"
+import Button from '@components/Button.astro'
+
+---
+
+<CldUploadWidget
+  id="upload-widget"
+  uploadPreset="spooky-hackaton-unsigned-images"
+  options={{
+    sources: ["local", "camera", "url"],
+    multiple: false,
+    maxFiles: 1,
+    language: "es",
+    text: {
+      es: {
+        or: "O",
+        menu: {
+          files: "Subir desde tu dispositivo",
+          camera: "Cámara",
+        },
+        local: {
+          browse: "Seleccionar",
+          dd_title_single: "Arrastra tu imagen aquí",
+        },
+        camera: {
+          take_pic: "Toma una foto y subela",
+          cancel: "Cancel",
+          explanation: "Asegúrate de que tu cámara esté conectada y que tu navegador permita la captura de la cámara. Cuando estés listo, haz clic en Capturar.",
+          camera_error: "Error al acceder a la cámara",
+          retry: "Reintentar cámara",
+        },
+        url: {
+            inner_title: "URL pública del archivo a subir:",
+        },
+      },
+    },
+    styles:{
+      palette: {
+        window: "#1E1E1E", // Dark background for the window
+        windowBorder: "#FF6500", // Orange border for the window
+        tabIcon: "#FF6500", // Orange icons for the tabs
+        menuIcons: "#FFFFFF", // White icons for the menu
+        textDark: "#FFFFFF", // White color for dark text
+        textLight: "#1E1E1E", // Dark color for light text
+        link: "#FF620C", // Orange color for links
+        action: "#FF620C", // Orange color for actions
+        inactiveTabIcon: "#5A616A", // Gray color for inactive tab icons
+        error: "#F44235", // Red color for errors
+        inProgress: "#0078FF", // Blue color for in-progress status
+        complete: "#20B832", // Green color for complete status
+        sourceBg: "#2E2E2E" // Dark gray background for the source
+      },
+      frame: {
+        background: "rgba(0, 0, 0, 0.5)"
+      },
+      fonts: {
+          "'Source Sans 3', system-ui, sans-serif": "https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@200..900&display=swap",
+      }
+    }
+  }}
+>
+  <Button text="Wear Costume">Upload</Button>
+</CldUploadWidget>
+
+<script>
+  import { navigate } from "astro:transitions/client"
+
+  const widget = document.getElementById("upload-widget")
+
+  if (widget) {
+    widget.addEventListener("clduploadwidget:success", ((
+      e: CustomEvent<{ info: { public_id: string } }>
+    ) => {
+      const publicId = e.detail.info.public_id
+      navigate(`/photo?id=${publicId}`)
+    }) as EventListener)
+  }
+</script>
