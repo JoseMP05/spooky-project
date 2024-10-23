@@ -34,7 +34,7 @@ import Layout from "@layouts/Layout.astro"
 import ExampleButton from "@components/ExampleButton.astro"
 import CostumeForm from "@components/CostumeForm.astro"
 import CostumeImage from '@components/CostumeImage.astro'
-import ShareAndDownload from '@components/ShareAndDownload.astro'
+import Download from '@components/Download.astro'
 
 const { searchParams } = Astro.url
 const id = searchParams.get("id")
@@ -43,7 +43,7 @@ if (id == null) Astro.redirect("/")
 
 const url = getCldImageUrl({ src: id })
 ---
-<Layout title="Cloudinary Photo">
+<Layout title="Choose Your Costume: Explore and Transform Your Image">
   <main data-id={id} id="appLayout">
     <div class="interactive">
       <section class="costume-form">
@@ -62,7 +62,7 @@ const url = getCldImageUrl({ src: id })
       <CostumeImage url={url} />
     </div>
     <div class="share">
-      <ShareAndDownload/>
+      <Download/>
     </div>
   </main>
 </Layout>
