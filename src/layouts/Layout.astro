@@ -4,7 +4,8 @@ import Footer from "@components/Footer.astro";
 
 const { title } = Astro.props;
 const currentUrl = new URL(Astro.request.url);
-const ogImageUrl = new URL("hallowear_open-graph.webp", Astro.request.url);
+const ogImageUrl = new URL("/hallowear_open-graph.webp", currentUrl.origin);
+console.log(ogImageUrl.href);
 ---
 
 <!doctype html>
