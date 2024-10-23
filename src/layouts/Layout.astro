@@ -22,6 +22,8 @@ const ogImageUrl = "https://hallowear-spooky-ai-hackathon.vercel.app/hallowear_o
 		<title>{title}</title>
 	</head>
 	<body>
+		<div id="screamContainer">
+		</div>
 		<Header/>
 		<slot/>
 		<Footer/>
@@ -99,5 +101,29 @@ const ogImageUrl = "https://hallowear-spooky-ai-hackathon.vercel.app/hallowear_o
 
 	a:hover{
 		color: var(--accent);
+	}
+
+	video{
+		width: 100%;
+		height: 100%;
+		max-width: 100%;
+		object-fit: cover;
+	}
+</style>
+
+<style>
+	div{
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		z-index: 100;
+		opacity: 0;
+		visibility: hidden;
+		/* background-color: rebeccapurple; */
+	}
+	div.active{
+		visibility: visible;
+		opacity: 1;
+		background-color: black;
 	}
 </style>

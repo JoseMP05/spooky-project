@@ -92,3 +92,49 @@ export async function createImageDownloadLink({imgSrc, name}) {
   link.href = imgURL
   link.download = `${name}.jpg`
 }
+
+export async function activateVideo(){
+  const screamActivated = sessionStorage.getItem('screamActivated')
+  sessionStorage.setItem('screamActivated', (parseInt(screamActivated) + 1).toString())
+
+  const videoSources = {
+    webm: '/videos/TheRing.webm',
+    mp4: '/videos/TheRing.mp4',
+  }
+
+  const videoContainer = document.getElementById('screamContainer')
+  videoContainer.classList.add('active')
+  const video = document.createElement('video')
+
+  const sourceWebm = document.createElement('source')
+  sourceWebm.src = videoSources.webm
+  sourceWebm.type = 'video/webm'
+
+  const sourceMp4 = document.createElement('source')
+  sourceWebm.src = videoSources.mp4
+  sourceWebm.type = 'video/mp4'
+
+  video.appendChild(sourceMp4)
+  video.appendChild(sourceWebm)
+
+  videoContainer.classList.add('active')
+  
+  setTimeout(() => {
+    videoContainer.appendChild(video)
+    video.play()
+  }, 2000)
+
+  return new Promise((resolve) => {
+    video.onended = () => {
+      
+      setTimeout(() => {
+        videoContainer.classList.remove('active')
+        video.remove()
+      }, 500)
+
+      setTimeout(() => {
+        resolve(true)
+      }, 1250)
+    }
+  })
+}
