@@ -35,6 +35,29 @@ import Button from '@components/Button.astro'
         },
       },
     },
+    styles:{
+      palette: {
+        window: "#1E1E1E", // Dark background for the window
+        windowBorder: "#FF6500", // Orange border for the window
+        tabIcon: "#FF6500", // Orange icons for the tabs
+        menuIcons: "#FFFFFF", // White icons for the menu
+        textDark: "#FFFFFF", // White color for dark text
+        textLight: "#1E1E1E", // Dark color for light text
+        link: "#FF620C", // Orange color for links
+        action: "#FF620C", // Orange color for actions
+        inactiveTabIcon: "#5A616A", // Gray color for inactive tab icons
+        error: "#F44235", // Red color for errors
+        inProgress: "#0078FF", // Blue color for in-progress status
+        complete: "#20B832", // Green color for complete status
+        sourceBg: "#2E2E2E" // Dark gray background for the source
+      },
+      frame: {
+        background: "rgba(0, 0, 0, 0.5)"
+      },
+      fonts: {
+          "'Source Sans 3', system-ui, sans-serif": "https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@200..900&display=swap",
+      }
+    }
   }}
 >
   <Button text="Wear Costume">Upload</Button>
