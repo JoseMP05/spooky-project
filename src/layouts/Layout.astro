@@ -4,8 +4,7 @@ import Footer from "@components/Footer.astro";
 
 const { title } = Astro.props;
 const currentUrl = new URL(Astro.request.url);
-const ogImageUrl = new URL("/hallowear_open-graph.webp", currentUrl.origin);
-console.log(ogImageUrl.href);
+const ogImageUrl = "https://hallowear-spooky-ai-hackathon.vercel.app/hallowear_open-graph.webp";
 ---
 
 <!doctype html>
@@ -18,7 +17,7 @@ console.log(ogImageUrl.href);
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content="Discover HalloWear, an innovative platform to create and share Halloween-themed content. Generate images, videos, and more with our easy-to-use tools. Join the spooky fun!" />
 		<meta property="og:url" content={currentUrl} />
-		<meta property="og:image" content={ogImageUrl.href} />
+		<meta property="og:image" content={ogImageUrl} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<title>{title}</title>
 	</head>
